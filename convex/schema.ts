@@ -11,7 +11,28 @@ export default defineSchema({
     completed: v.boolean(),
     category: v.optional(v.string()),
     reminderSent: v.optional(v.boolean()),
+    calendarEventId: v.optional(v.string()),
   })
     .index("by_completed", ["completed"])
     .index("by_due_date", ["dueDate"]),
+
+  googleTokens: defineTable({
+    userId: v.string(),
+    accessToken: v.string(),
+    refreshToken: v.optional(v.string()),
+    expiresAt: v.number(),
+    calendarId: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_user", ["userId"]),
+
+  outlookTokens: defineTable({
+    userId: v.string(),
+    accessToken: v.string(),
+    refreshToken: v.optional(v.string()),
+    expiresAt: v.number(),
+    calendarId: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_user", ["userId"]),
 });

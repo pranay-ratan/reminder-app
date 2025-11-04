@@ -13,7 +13,9 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as googleCalendar from "../googleCalendar.js";
 import type * as http from "../http.js";
+import type * as outlookCalendar from "../outlookCalendar.js";
 import type * as router from "../router.js";
 import type * as tasks from "../tasks.js";
 
@@ -26,7 +28,9 @@ import type * as tasks from "../tasks.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  googleCalendar: typeof googleCalendar;
   http: typeof http;
+  outlookCalendar: typeof outlookCalendar;
   router: typeof router;
   tasks: typeof tasks;
 }>;

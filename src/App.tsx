@@ -2,7 +2,7 @@ import { useQuery } from "convex/react";
 import { api } from "../convex/_generated/api";
 import { Toaster } from "sonner";
 import { TaskManager } from "./components/TaskManager";
-import { GoogleCalendarIntegration } from "./components/GoogleCalendarIntegration";
+import { OutlookCalendarIntegration } from "./components/OutlookCalendarIntegration";
 import Iridescence from "./components/Iridescence";
 import { useEffect, useState } from "react";
 import "./components/Iridescence.css";
@@ -95,7 +95,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4">
-            <GoogleCalendarIntegration isHorrorMode={isHorrorMode} />
+            <OutlookCalendarIntegration isHorrorMode={isHorrorMode} />
           </div>
         </div>
       </header>

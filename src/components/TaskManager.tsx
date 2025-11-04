@@ -139,6 +139,64 @@ export function TaskManager({ isHorrorMode }: TaskManagerProps) {
         </div>
       )}
 
+      {/* Day Summary */}
+      <div className={`p-6 rounded-2xl shadow-xl transition-all duration-500 ${
+        isHorrorMode
+          ? 'bg-purple-900/70 border border-red-600/50'
+          : 'bg-white/10 border border-pink-300/40'
+      } backdrop-blur-xl`}>
+        <h3 className={`text-xl font-bold mb-4 flex items-center gap-2 ${
+          isHorrorMode ? 'text-red-200' : 'text-pink-700'
+        }`}>
+          <span className="text-2xl">{isHorrorMode ? '🌙' : '📊'}</span>
+          {isHorrorMode ? 'Day Overview' : 'Day Summary'}
+          <span className="text-2xl">{isHorrorMode ? '👻' : '✨'}</span>
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className={`p-4 rounded-lg ${
+            isHorrorMode ? 'bg-red-900/50' : 'bg-blue-50/30'
+          }`}>
+            <h4 className={`font-semibold mb-2 ${isHorrorMode ? 'text-red-200' : 'text-blue-700'}`}>
+              {isHorrorMode ? '🕸️ Today\'s Focus' : '🎯 Today\'s Focus'}
+            </h4>
+            <p className={`text-sm ${isHorrorMode ? 'text-purple-300' : 'text-blue-600'}`}>
+              {pendingTasks.length > 0
+                ? `${pendingTasks.length} task${pendingTasks.length !== 1 ? 's' : ''} to conquer today!`
+                : isHorrorMode ? 'All tasks completed! The spirits are pleased.' : 'All caught up! Time to relax! 🌸'
+              }
+            </p>
+          </div>
+
+          <div className={`p-4 rounded-lg ${
+            isHorrorMode ? 'bg-green-900/50' : 'bg-green-50/30'
+          }`}>
+            <h4 className={`font-semibold mb-2 ${isHorrorMode ? 'text-green-200' : 'text-green-700'}`}>
+              {isHorrorMode ? '🎃 Progress' : '📈 Progress'}
+            </h4>
+            <p className={`text-sm ${isHorrorMode ? 'text-green-300' : 'text-green-600'}`}>
+              {tasks.length > 0
+                ? `${Math.round((completedTasks.length / tasks.length) * 100)}% complete - ${completedTasks.length} of ${tasks.length} tasks done!`
+                : 'No tasks yet today.'
+              }
+            </p>
+          </div>
+        </div>
+
+        {overdueTasks.length > 0 && (
+          <div className={`mt-4 p-4 rounded-lg ${
+            isHorrorMode ? 'bg-red-900/50 border border-red-500' : 'bg-red-50/30 border border-red-300'
+          }`}>
+            <h4 className={`font-semibold mb-2 ${isHorrorMode ? 'text-red-200' : 'text-red-700'}`}>
+              {isHorrorMode ? '💀 Urgent Attention Needed' : '⚠️ Needs Attention'}
+            </h4>
+            <p className={`text-sm ${isHorrorMode ? 'text-red-300' : 'text-red-600'}`}>
+              {overdueTasks.length} overdue task{overdueTasks.length !== 1 ? 's' : ''} - let's get these done!
+            </p>
+          </div>
+        )}
+      </div>
+
       {/* Task Lists */}
       <div className="space-y-6">
         {overdueTasks.length > 0 && (

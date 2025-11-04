@@ -80,21 +80,29 @@ export const deleteTask = mutation({
 
 export const updateTask = mutation({
   args: {
-    taskId: v.id("tasks"),
+    id: v.id("tasks"),
     title: v.optional(v.string()),
     description: v.optional(v.string()),
     dueDate: v.optional(v.number()),
     dueTime: v.optional(v.string()),
     priority: v.optional(v.union(v.literal("low"), v.literal("medium"), v.literal("high"))),
     category: v.optional(v.string()),
+    calendarEventId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    const { taskId, ...updates } = args;
-    const task = await ctx.db.get(taskId);
+    const { id, ...updates } = args;
+    const task = await ctx.db.get(id);
     if (!task) {
       throw new Error("Task not found");
     }
 
-    await ctx.db.patch(taskId, updates);
+    await ctx.db.patch(id, updates);
+  },
+});
+
+export const getTask = query({
+  args: { id: v.id("tasks") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
   },
 });
